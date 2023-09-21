@@ -9,8 +9,40 @@
   padding: 2em;
 }
 
-.cell-wapper {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.cell {
+  &-wapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+  }
+
+  &__number {
+    font-size: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    &--gray {
+      color: gray;
+    }
+  }
+
+  input {
+    width: 40px;
+    aspect-ratio: 1/1.6;
+    font-size: 20px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: none;
+    border: 2px solid grey;
+    text-align: center;
+  }
+}
+
+.base {
+  position: absolute;
+  right: -30px;
+  top: 115px;
+  font-size: 12px;
+  color: grey;
 }

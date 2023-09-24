@@ -1,4 +1,5 @@
 import { useState, KeyboardEvent, forwardRef, LegacyRef } from 'react'
+import { useNumerals, useNumeralsDispatch } from '../context'
 
 const Cell = forwardRef(function (
   {
@@ -12,7 +13,11 @@ const Cell = forwardRef(function (
   },
   ref: LegacyRef<HTMLInputElement>
 ) {
-  const [digit, setDigit] = useState('0')
+  const numerals = useNumerals()
+  const dispatch = useNumeralsDispatch()
+
+  const initialCell = numerals![radix].split('').reverse()[number]
+  const [digit, setDigit] = useState(initialCell)
 
   function setValue(event: React.ChangeEvent<HTMLInputElement>) {
     const val: string = event.target.value
@@ -34,6 +39,7 @@ const Cell = forwardRef(function (
     const valFiltered: string =
       val.slice(val.length - 1).replace(regexp, '') || '0'
     setDigit(valFiltered)
+    dispatch({ type: 'added', payload: '00000000'})
   }
 
   const tabIndex = (): number => {

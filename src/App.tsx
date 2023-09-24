@@ -1,5 +1,6 @@
 import 'Styles/App.scss'
 import Binary from 'Components/Binary'
+import Octal from 'Components/Octal'
 import Decimals from 'Components/Decimals'
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
       <h1>Converter <br />(Vite + React + TS)</h1>
       <div className="checkered">
         <Binary />
-        <Decimals value={100} />
+        <Octal />
+        <Decimals />
       </div>
     </>
   )

@@ -1,44 +1,91 @@
-import { useState } from 'react'
+import { useState, KeyboardEvent, forwardRef, LegacyRef } from 'react'
 
-function Cell({ number, base }: { number: number; base: number }) {
-  const [digit, setDigit] = useState(0)
-  console.log(base)
+const Cell = forwardRef(function (
+  {
+    number,
+    radix,
+    moveFocus,
+  }: {
+    number: number
+    radix: number
+    moveFocus: (e: KeyboardEvent<HTMLInputElement>, number: number) => void
+  },
+  ref: LegacyRef<HTMLInputElement>
+) {
+  const [digit, setDigit] = useState('0')
 
   function setValue(event: React.ChangeEvent<HTMLInputElement>) {
     const val: string = event.target.value
-    const valFiltered: string = val.length
-      ? val.slice(val.length - 1).replace(/[2-9]|[a-z,A-Z]/g, '')
-      : '0'
-    const valInt: number = parseInt(valFiltered)
-    setDigit(valInt)
+    let regexpCondition = ''
+    switch (radix) {
+      case 2:
+      case 8:
+        regexpCondition =`[${radix}-9]|[a-z]`
+        break
+      case 10:
+        regexpCondition =`[a-z]`
+        break
+      default:
+        regexpCondition = `[j-z]`
+        break
+    }
+
+    const regexp = new RegExp(`^0+(?=d)|${regexpCondition}/gi`)
+    const valFiltered: string =
+      val.slice(val.length - 1).replace(regexp, '') || '0'
+    setDigit(valFiltered)
+  }
+
+  const tabIndex = (): number => {
+    switch (radix) {
+      case 2: {
+        return 8 - number
+      }
+      case 8: {
+        return 11 - number
+      }
+      case 10: {
+        return 14 - number
+      }
+      case 16: {
+        return 17 - number
+      }
+      default: {
+        return 20 - number
+      }
+    }
   }
 
   return (
     <div className="cell">
       <p className="cell__number">
-        {base}
+        {radix}
         <sup>{number}</sup>
       </p>
       <input
         name="digit"
         type="number"
         maxLength={1}
+        max={radix - 1}
+        min="0"
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck={false}
-        tabIndex={8 - number}
+        tabIndex={tabIndex()}
         value={digit}
         onChange={setValue}
+        onKeyUp={(e) => moveFocus(e, number)}
+        ref={ref}
       />
-      <p className="cell__number">{base ** number}</p>
-      <p className={'cell__number ' + (digit ? '' : 'cell__number--gray')}>
-        {base ** number} * {isNaN(digit) ? 0 : digit}
+      <p className="cell__number">{radix ** number}</p>
+      <p className={'cell__number ' + (parseInt(digit) ? '' : 'cell__number--gray')}>
+        {radix ** number} * {digit}
       </p>
-      <p className={'cell__number ' + (digit ? '' : 'cell__number--gray')}>
-        {base ** number * (isNaN(digit) ? 0 : digit)}
+      <p className={'cell__number ' + (parseInt(digit) ? '' : 'cell__number--gray')}>
+        {radix ** number * parseInt(digit)}
       </p>
     </div>
   )
-}
+})
 
 export default Cell

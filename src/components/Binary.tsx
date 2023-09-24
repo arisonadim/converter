@@ -1,20 +1,20 @@
-import Cell from './Cell'
+import CellRow from 'Components/CellRow'
+// import type { Ref } from '@/types'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { updateDigits } from './binarySlice'
 
 export default function Binary() {
-  const digits: number[] = [ ...Array(8).keys() ]
-  const base: number = 2
-
-  const cells = digits.reverse().map((item) => 
-      <Cell number={item} base={base} />
-  )
+  // const digitsState = useSelector((state) => state.digits.value)
+  // const dispatch = useDispatch()
+  const radix: number = 2
 
   return (
     <div className="binary">
       <h2>Binary</h2>
       <div className="cell-wapper">
-        {cells}
-        <div className="base">{base}</div>
+        <CellRow radix={radix} digits={8}/>
+        <div className="base">{radix}</div>
       </div>
     </div>
-  );
+  )
 }

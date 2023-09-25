@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-Binary - Octal - Decimal - Hexadecimal converter
+Binary - Octal - Decimal - Hexadecimal visual converter
 
 Used Vite template (react-ts). 
 

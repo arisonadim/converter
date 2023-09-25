@@ -2,7 +2,7 @@ import { KeyboardEvent, useRef } from 'react'
 import Cell from './Cell'
 
 export default function CellRow({digits, radix}: {digits: number, radix: number}) {
-  const digitsArray: number[] = [...Array(digits).keys()]
+  const digitsArray: number[] = [...Array(digits).keys()].reverse()
 
   const refs = useRef<(HTMLInputElement | null)[]>([])
 
@@ -19,11 +19,11 @@ export default function CellRow({digits, radix}: {digits: number, radix: number}
   }
 
   const cells = digitsArray
-    .reverse()
     .map((item, index) => (
       <Cell
         number={item}
         radix={radix}
+        digits={digits}
         key={`octal-${item}`}
         moveFocus={focusHandler}
         ref={(inst) => (refs.current[index] = inst)}

@@ -13,5 +13,7 @@ ToDo:
 1. Set limit fallback for decimal number > 255
 2. Add clear visual conversion from Binary to Octal by grouping each 3 digits
 3. Add Hexadecimal inputs block with validation
+4. Add notification universal component
+5. Add tooltips for inputs to show allowed range
 
 Production available at [arisonadim.github.io/converter](https://arisonadim.github.io/converter)

@@ -57,7 +57,7 @@ const Cell = forwardRef(function (
       const decimal = parseInt(stateArrayToString, radix)
       const radixLength = i === 2 ? 8 : 3
       const radixArray = decimal.toString(i).split('')
-      const leadingZeros = Array(radixLength - radixArray.length).fill(0)
+      const leadingZeros = Array(radixLength - radixArray.length).fill('0')
       state[i] = [...leadingZeros, ...radixArray]
     })
 

@@ -9,7 +9,7 @@ const initialContext: StateContextType = {
   2: Array(8).fill('0'),
   8: Array(3).fill('0'),
   10: Array(3).fill('0'),
-  // 16: '000',
+  16: Array(3).fill('0'),
 }
 
 type Context = {

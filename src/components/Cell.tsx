@@ -32,6 +32,9 @@ const Cell = forwardRef(function (
       case 10:
         regexpCondition =`[a-z]`
         break
+      case 16:
+        regexpCondition = `[j-z]`
+        break
       default:
         regexpCondition = `[j-z]`
         break
@@ -42,6 +45,7 @@ const Cell = forwardRef(function (
       val.slice(val.length - 1).replace(regexp, '') || '0'
     const stateArray = [...context!.numerals[radix]]
     stateArray[cellIndex] = valFiltered
+    // TODO check if > 255
     const stateObj: { [key: number]: string[] } = {}
     stateObj[radix] = stateArray
     const rest = calcOthers(stateArray)
@@ -50,7 +54,7 @@ const Cell = forwardRef(function (
 
   const calcOthers = (stateArray: string[]) => {
     const state = {...context!.numerals }
-    const systems = [2, 8, 10]
+    const systems = [2, 8, 10, 16]
     const stateArrayToString = stateArray.join('').toString()
     systems.forEach((i) => {
       if (i === radix) return
@@ -92,7 +96,7 @@ const Cell = forwardRef(function (
       </p>
       <input
         name="digit"
-        type="number"
+        type={radix === 16 ? 'text' : 'number'}
         maxLength={1}
         max={radix - 1}
         min="0"

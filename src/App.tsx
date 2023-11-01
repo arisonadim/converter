@@ -2,6 +2,7 @@ import 'Styles/App.scss'
 import Binary from 'Components/Binary'
 import Octal from 'Components/Octal'
 import Decimals from 'Components/Decimals'
+import Hex from './components/Hex'
 import { StateProvider } from './context'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Binary />
           <Octal />
           <Decimals />
+          <Hex />
         </StateProvider>
       </div>
     </>

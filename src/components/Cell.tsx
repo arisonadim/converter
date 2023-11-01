@@ -85,7 +85,7 @@ const Cell = forwardRef(function (
   }
 
   return (
-    <div className="cell">
+    <div className={'cell ' + (parseInt(digit, radix) ? '' : 'cell--gray')}>
       <p className="cell__number">
         {radix}
         <sup>{number}</sup>
@@ -106,11 +106,11 @@ const Cell = forwardRef(function (
         ref={ref}
       />
       <p className="cell__number">{radix ** number}</p>
-      <p className={'cell__number ' + (parseInt(digit) ? '' : 'cell__number--gray')}>
-        {radix ** number} * {digit}
+      <p className="cell__number">
+        {radix ** number} * {parseInt(digit, radix)}
       </p>
-      <p className={'cell__number ' + (parseInt(digit) ? '' : 'cell__number--gray')}>
-        {radix ** number * parseInt(digit)}
+      <p className="cell__number">
+        {radix ** number * parseInt(digit, radix)}
       </p>
     </div>
   )

@@ -12,6 +12,13 @@ export default function Binary() {
     <div className="binary">
       <h2>Binary</h2>
       <div className="cell-wapper">
+        <div className="cell cell--lightgray">
+          <p className="cell__number">2<sup>8</sup></p>
+          <div className="cell__addzero">0</div>
+          <p className="cell__number">256</p>
+          <p className="cell__number">256 * 0</p>
+          <p className="cell__number">0</p>
+        </div>
         <CellRow radix={radix} digits={8}/>
         <div className="base">{radix}</div>
       </div>

@@ -8,6 +8,7 @@ set -e
 npm run build
 
 # navigate into the build output directory
+cp .gitignore dist/
 cd dist
 
 # if you are deploying to a custom domain

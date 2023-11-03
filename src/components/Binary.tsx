@@ -8,6 +8,18 @@ export default function Binary() {
   // const dispatch = useDispatch()
   const radix: number = 2
 
+  const iterator = Array.from(Array(3).keys())
+
+  const octets = iterator.map((i) => (
+    <div className="arrow" key={i}>
+      {
+        iterator.map((item) => (
+          <p className="cell__number" key={100+item}>2<sup>{2-item}</sup></p>
+        ))
+      }
+    </div>
+  ))
+
   return (
     <div className="binary">
       <h2>Binary</h2>
@@ -21,6 +33,9 @@ export default function Binary() {
         </div>
         <CellRow radix={radix} digits={8}/>
         <div className="base">{radix}</div>
+      </div>
+      <div className="arrows cell--lightgray">
+        {octets}
       </div>
     </div>
   )

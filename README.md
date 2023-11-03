@@ -16,7 +16,7 @@ ToDo:
 4. Add tooltips for inputs to show allowed range
 
 Done:
-1. Add clear visual conversion from Binary to Octal by grouping each 3 digits
-2. Add Hexadecimal inputs block
+1. Added clear visual conversion from Binary to Octal by grouping each 3 digits
+2. Added Hexadecimal inputs block
 
 Production available at [arisonadim.github.io/converter](https://arisonadim.github.io/converter)

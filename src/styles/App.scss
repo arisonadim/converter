@@ -41,6 +41,10 @@
 
   &--lightgray {
     color: lightgrey;
+
+    @media (prefers-color-scheme: dark) {
+      color: gray;
+    }
   }
 
   &__addzero {
@@ -54,6 +58,11 @@
     align-items: center;
     justify-content: center;
     color: lightgrey;
+    
+    @media (prefers-color-scheme: dark) {
+      color: gray;
+      border-color: gray;
+    }
   }
 
   input {

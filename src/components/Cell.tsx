@@ -45,10 +45,12 @@ const Cell = forwardRef(function (
       val.slice(val.length - 1).replace(regexp, '') || '0'
     const stateArray = [...context!.numerals[radix]]
     stateArray[cellIndex] = valFiltered
-    // TODO check if > 255
+    const stateArrayToString = stateArray.join('').toString()
+    const decimal = parseInt(stateArrayToString, radix)
+    if (decimal > 255) return // TODO show notification
     const stateObj: { [key: number]: string[] } = {}
     stateObj[radix] = stateArray
-    const rest = calcOthers(stateArray)
+    const rest = calcOthers(stateArrayToString)
     context?.setNumerals( {...rest, ...stateObj} )
   }
 
@@ -58,10 +60,9 @@ const Cell = forwardRef(function (
     e.target.value = val
   }
 
-  const calcOthers = (stateArray: string[]) => {
+  const calcOthers = (stateArrayToString: string) => {
     const state = {...context!.numerals }
     const systems = [2, 8, 10, 16]
-    const stateArrayToString = stateArray.join('').toString()
     systems.forEach((i) => {
       if (i === radix) return
       const decimal = parseInt(stateArrayToString, radix)

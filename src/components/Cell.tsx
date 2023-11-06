@@ -33,14 +33,14 @@ const Cell = forwardRef(function (
         regexpCondition =`[a-z]`
         break
       case 16:
-        regexpCondition = `[j-z]`
+        regexpCondition = `[g-z]`
         break
       default:
-        regexpCondition = `[j-z]`
+        regexpCondition = `[g-z]`
         break
     }
 
-    const regexp = new RegExp(`^0+(?=d)|${regexpCondition}/gi`)
+    const regexp = new RegExp(`^0+(?=d)|${regexpCondition}`,'gi')
     const valFiltered: string =
       val.slice(val.length - 1).replace(regexp, '') || '0'
     const stateArray = [...context!.numerals[radix]]
@@ -50,6 +50,12 @@ const Cell = forwardRef(function (
     stateObj[radix] = stateArray
     const rest = calcOthers(stateArray)
     context?.setNumerals( {...rest, ...stateObj} )
+  }
+
+  const setFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const val =e.target.value
+    e.target.value = ''
+    e.target.value = val
   }
 
   const calcOthers = (stateArray: string[]) => {
@@ -97,7 +103,7 @@ const Cell = forwardRef(function (
       <input
         name="digit"
         type={radix === 16 ? 'text' : 'number'}
-        maxLength={1}
+        maxLength={radix === 16 ? undefined : 1}
         max={radix - 1}
         min="0"
         autoCorrect="off"
@@ -105,7 +111,8 @@ const Cell = forwardRef(function (
         spellCheck={false}
         tabIndex={tabIndex()}
         value={digit}
-        onChange={setValue}
+        onInput={setValue}
+        onFocus={setFocus}
         onKeyUp={(e) => moveFocus(e, number)}
         ref={ref}
       />

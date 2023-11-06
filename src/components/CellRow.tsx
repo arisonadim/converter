@@ -18,13 +18,28 @@ export default function CellRow({digits, radix}: {digits: number, radix: number}
     refs.current[i]?.focus()
   }
 
+  const radixToString = () => {
+    switch (radix) {
+      case 2:
+        return 'binary'
+      case 8:
+        return 'octal'
+      case 10:
+        return 'decimal'
+      case 16:
+        return 'hex'
+      default:
+        return 'unknown'
+    }
+  }
+
   const cells = digitsArray
     .map((item, index) => (
       <Cell
         number={item}
         radix={radix}
         digits={digits}
-        key={`octal-${item}`}
+        key={`${radixToString}-${item}`}
         moveFocus={focusHandler}
         ref={(inst) => (refs.current[index] = inst)}
       />
